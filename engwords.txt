@@ -1,0 +1,5 @@
+﻿open
+blue
+deep
+tall
+green
