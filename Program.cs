@@ -112,7 +112,10 @@ namespace words
                 Console.WriteLine("Error: cannot add to the file!");
             }
         }
+        private static void RepeatWords()
+        {
 
+        }
         private static void TestWordKnowledge(List<string> rus, List<string> eng, Dictionary<string,string> toRepeat, int numOfWords = 10)
         {
             int correctAnswers = 0;
