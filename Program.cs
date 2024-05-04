@@ -14,19 +14,20 @@ namespace words
             Console.OutputEncoding = Encoding.UTF8;
 
             string path = @"C:\Users\opilane\source\repos\suhhanova\words\";
+            string path2 = @"C:\work\words_cSharp\";
 
             List<string> rusWords = new List<string>();
             List<string> engWords = new List<string>();
 
             try
             {
-                foreach (string row in File.ReadAllLines(path + "ruswords.txt", Encoding.UTF8))
+                foreach (string row in File.ReadAllLines(path2 + "ruswords.txt"))
                 {
-                    rusWords.Add(row.ToLower().Trim());
+                    rusWords.Add(row.ToLower());
                 }
-                foreach (string row in File.ReadAllLines(path + "engwords.txt"))
+                foreach (string row in File.ReadAllLines(path2 + "engwords.txt"))
                 {
-                    engWords.Add(row.ToLower().Trim());
+                    engWords.Add(row.ToLower());
                 }
             }
             catch (Exception)
@@ -53,7 +54,7 @@ namespace words
             while (true)
             {
                 Console.WriteLine("Enter a word to translate (type 'exit' to quit):");
-                string input = Console.ReadLine().ToLower().Trim();
+                string input = Console.ReadLine().ToLower();
                 if (input == "exit") 
                 { 
                     break;
