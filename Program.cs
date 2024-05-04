@@ -49,11 +49,18 @@ namespace words
                 { 
                     break;
                 } 
-                else if (input == "test")
+                else if (input.StartsWith("test"))
                 {
                     List<string> splited = new(input.Split(" "));
-                    int numOfWords = Int32.Parse(splited[1]);
-                    ClassMain.TestWordKnowledge(rusWords, engWords, toRepeat, numOfWords);
+                    try
+                    {
+                        int numOfWords = Int32.Parse(splited[1]);
+                        ClassMain.TestWordKnowledge(rusWords, engWords, toRepeat, numOfWords);
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("You did not write a number of words!");
+                    }
                 } 
                 else
                 {
@@ -108,7 +115,6 @@ namespace words
 
         private static void TestWordKnowledge(List<string> rus, List<string> eng, Dictionary<string,string> toRepeat, int numOfWords = 10)
         {
-            int count = 0;
             int correctAnswers = 0;
             Random rand = new();
             for (int i = 0; i < numOfWords; i++)
@@ -129,10 +135,8 @@ namespace words
                     toRepeat.Add(rusWord, engWord);
                     Console.WriteLine($"The correct answer is {engWord}!");
                 }
-                count++;
             }
-
-            double score = (correctAnswers / count) * 100;
+            decimal score = ((decimal)correctAnswers / (decimal)numOfWords) * 100;
             Console.WriteLine($"Your result: {score}");
         }
     }
