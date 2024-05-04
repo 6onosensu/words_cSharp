@@ -8,32 +8,18 @@ namespace words
 {
     public class ClassMain
     {
+        private const string PATH = @"C:\Users\opilane\source\repos\suhhanova\words\";
+        private const string PATH2 = @"C:\work\words_cSharp\";
         public static void Main(string[] args)
         {
             Console.InputEncoding = Encoding.UTF8;
             Console.OutputEncoding = Encoding.UTF8;
 
-            string path = @"C:\Users\opilane\source\repos\suhhanova\words\";
-            string path2 = @"C:\work\words_cSharp\";
+            List<string> rusWords = new();
+            List<string> engWords = new();
 
-            List<string> rusWords = new List<string>();
-            List<string> engWords = new List<string>();
-
-            try
-            {
-                foreach (string row in File.ReadAllLines(path2 + "ruswords.txt"))
-                {
-                    rusWords.Add(row.ToLower());
-                }
-                foreach (string row in File.ReadAllLines(path2 + "engwords.txt"))
-                {
-                    engWords.Add(row.ToLower());
-                }
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Error with the file!");
-            }
+            ClassMain.GetFromFile(rusWords, "ruswords.txt");
+            ClassMain.GetFromFile(engWords, "engwords.txt");
 
             if (engWords.Count != rusWords.Count)
             {
@@ -41,7 +27,8 @@ namespace words
                 return;
             }
 
-            for (int i = 0; i < rusWords.Count; i++)
+            /*
+             for (int i = 0; i < rusWords.Count; i++)
             {
                 Console.WriteLine(rusWords[i]);
             }
@@ -50,6 +37,7 @@ namespace words
             {
                 Console.WriteLine(engWords[i]);
             }
+            */
 
             while (true)
             {
@@ -77,6 +65,21 @@ namespace words
                 }
                
                 Console.WriteLine("Word not found: " + input);
+            }
+        }
+
+        private static void GetFromFile(List<string> list, string fileName)
+        {
+            try
+            {
+                foreach (string row in File.ReadAllLines(PATH2 + fileName ))
+                {
+                    list.Add(row.ToLower());
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error with the file!");
             }
         }
     }
