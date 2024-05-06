@@ -10,6 +10,7 @@ namespace words
     {
         private const string PATH = @"C:\Users\opilane\source\repos\suhhanova\words\";
         private const string PATH2 = @"C:\work\words_cSharp\";
+
         public static void Main(string[] args)
         {
             Console.InputEncoding = Encoding.UTF8;
@@ -29,26 +30,14 @@ namespace words
                 return;
             }
 
-            /*
-             for (int i = 0; i < rusWords.Count; i++)
-            {
-                Console.WriteLine(rusWords[i]);
-            }
-
-            for (int i = 0; i < engWords.Count; i++)
-            {
-                Console.WriteLine(engWords[i]);
-            }
-            */
-
             while (true)
             {
                 Console.WriteLine("Enter a word to translate (type 'exit' to quit OR type 'test ' and number of words to check knowledge):");
                 string input = Console.ReadLine().ToLower();
-                if (input == "exit") 
-                { 
+                if (input == "exit")
+                {
                     break;
-                } 
+                }
                 else if (input.StartsWith("test"))
                 {
                     List<string> splited = new(input.Split(" "));
@@ -61,7 +50,11 @@ namespace words
                     {
                         Console.WriteLine("You did not write a number of words!");
                     }
-                } 
+                }
+                else if (input == "repeat")
+                {
+                    RepeatWords(toRepeat);
+                }
                 else
                 {
                     int index1 = rusWords.IndexOf(input);
@@ -71,7 +64,7 @@ namespace words
                     {
                         Console.WriteLine("English: " + engWords[index1]);
                         continue;
-                    }
+                    } 
 
                     int index2 = engWords.IndexOf(input);
                     if (index2 != -1)
@@ -99,23 +92,17 @@ namespace words
                 Console.WriteLine("Error with the file!");
             }
         }
-        private static void AddToFile(List<string> list, string fileName)
+
+        private static void RepeatWords(Dictionary<string, string> toRepeat)
         {
-            try
+            foreach (KeyValuePair<string, string> kvp in toRepeat)
             {
-                Console.WriteLine($"Enter a word into the {list} ");
-                string input = Console.ReadLine().ToLower();
-                File.AppendAllText((PATH2 + fileName), input);
+                Console.WriteLine("{0} : {1}", kvp.Key, kvp.Value);
+                toRepeat.Remove(kvp.Key);
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Error: cannot add to the file!");
-            }
-        }
-        private static void RepeatWords()
-        {
 
         }
+
         private static void TestWordKnowledge(List<string> rus, List<string> eng, Dictionary<string,string> toRepeat, int numOfWords = 10)
         {
             int correctAnswers = 0;
