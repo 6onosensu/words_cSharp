@@ -8,8 +8,8 @@ namespace words
 {
     public class ClassMain
     {
-        private const string PATH = @"C:\Users\opilane\source\repos\suhhanova\words\";
-        private const string PATH2 = @"C:\work\words_cSharp\";
+        private const string PATH = @"C:\Users\opilane\source\repos\6onosensu\words_cSharp\";
+        //private const string PATH = @"C:\work\words_cSharp\";
 
         public static void Main(string[] args)
         {
@@ -24,7 +24,7 @@ namespace words
             ClassMain.GetFromFile(rusWords, "ruswords.txt");
             ClassMain.GetFromFile(engWords, "engwords.txt");
 
-            if (engWords.Count != rusWords.Count)
+            if (engWords.Count() != rusWords.Count())
             {
                 Console.WriteLine("The lists do not have the same number of words.");
                 return;
@@ -82,7 +82,7 @@ namespace words
         {
             try
             {
-                foreach (string row in File.ReadAllLines(PATH2 + fileName ))
+                foreach (string row in File.ReadAllLines(PATH + fileName ))
                 {
                     list.Add(row.ToLower());
                 }
